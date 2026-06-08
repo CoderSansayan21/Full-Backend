@@ -1,15 +1,11 @@
 const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
 
-dotenv.config();
 
 const app = express();
 
-app.use(cors());
 app.use(express.json());
 
-// Routes (ONLY ONCE)
+
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/courses", require("./routes/courseRoutes"));
@@ -18,8 +14,11 @@ app.use("/api/tasks", require("./routes/taskRoutes"));
 app.use("/api/task-submissions", require("./routes/taskSubmissionRoutes"));
 app.use("/api/attendance", require("./routes/attendanceRoutes"));
 
-const PORT = process.env.PORT || 5000;
+app.get("/", (req, res) => {
+  res.send(" UKI Student Backend Running");
+});
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on ${PORT}`);
+// Start Server
+app.listen(3000, () => {
+    console.log("Server Started");
 });
